@@ -8,7 +8,7 @@ export default defineConfig({
     build: {
         rollupOptions: {
             input: {
-                main: resolve(__dirname, 'playground/workspace.html'),
+                index: resolve(__dirname, 'playground/workspace.html'),
             },
         },
     },
