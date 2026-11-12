@@ -14,6 +14,30 @@ const customDarkTheme = createTheme({
   background: '#020920',
 });
 
+// 👇 TIÊM CSS TÙY CHỈNH ĐỂ LÀM NỔI BẬT KHUNG VIỀN Ô NHẬP LIỆU TRÊN BẢNG SETTINGS
+const customInputStyles = document.createElement('style');
+customInputStyles.innerHTML = `
+  /* Tạo khung viền sáng màu, tinh tế cho các ô nhập text/string trong bảng Settings */
+  input[type="text"], 
+  input:not([type]), 
+  textarea {
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 6px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+    padding: 6px 10px !important;
+    outline: none !important;
+    transition: border-color 0.2s ease;
+  }
+  /* Hiệu ứng sáng lên khi người dùng click vào ô nhập key */
+  input[type="text"]:focus, 
+  input:not([type]):focus {
+    border-color: #ff9800 !important;
+    background: rgba(255, 152, 0, 0.05) !important;
+  }
+`;
+document.head.appendChild(customInputStyles);
+
 // 1. ĐỊNH NGHĨA CHUẨN NATIVE INDICATOR DESCRIPTOR CHO WYNMANGO BIGMONEY
 const wynAlgoBigMoneyNative: NativeIndicatorDescriptor = {
     type: "wynalgo-bigmoney-3.1",
