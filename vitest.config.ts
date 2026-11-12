@@ -4,12 +4,9 @@ import { resolve } from 'path';
 
 export default defineConfig({
     plugins: [velaUiSource()],
-    root: 'playground', // Đặt thư mục gốc build là playground để nhận thẳng file HTML ở đây
     build: {
-        outDir: '../dist',
-        emptyOutDir: true,
         rollupOptions: {
-            input: resolve(__dirname, 'playground/workspace.html'),
+            input: resolve(__dirname, 'index.html'),
         },
     },
     test: {

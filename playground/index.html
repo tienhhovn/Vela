@@ -1,81 +1,79 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Vela — playground</title>
+        <title>WynAlgo Trading Platform — Biểu đồ độc quyền</title>
+        <!-- Nhúng Tailwind CSS để hiển thị chính xác các class của Header WynAlgo -->
+        <script src="https://cdn.tailwindcss.com"></script>
         <style>
             html,
             body {
                 margin: 0;
                 height: 100%;
-                background: #131722;
-                color: #d1d4dc;
-                font-family: -apple-system, system-ui, sans-serif;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                background: #0c0d10;
+                overflow: hidden;
             }
-            main {
-                text-align: center;
-            }
-            h1 {
-                font-size: 22px;
-                font-weight: 600;
-                color: #f0f3fa;
-                margin: 0 0 6px;
-            }
-            p {
-                margin: 0 0 28px;
-                color: #868a96;
-                font-size: 13px;
-            }
-            nav {
-                display: flex;
-                gap: 16px;
-                justify-content: center;
-            }
-            a.card {
-                display: block;
-                width: 220px;
-                padding: 22px 18px;
-                border: 1px solid #2a2b30;
-                border-radius: 8px;
-                background: #1c1d20;
-                color: inherit;
-                text-decoration: none;
-                transition: border-color 120ms ease;
-            }
-            a.card:hover {
-                border-color: #2962ff;
-            }
-            a.card b {
-                display: block;
-                font-size: 15px;
-                color: #f0f3fa;
-                margin-bottom: 6px;
-            }
-            a.card span {
-                font-size: 12px;
-                color: #868a96;
-                line-height: 1.5;
+            /* Đẩy khung biểu đồ xuống phía dưới Header (chiều cao Header khoảng 76px) */
+            #workspace {
+                position: absolute;
+                top: 76px;
+                left: 0;
+                right: 0;
+                bottom: 0;
             }
         </style>
     </head>
-    <body>
-        <main>
-            <h1>Vela playground</h1>
-            <p>Pick a surface to exercise — both serve straight from <code>src/</code> with hot reload.</p>
-            <nav>
-                <a class="card" href="./widget.html">
-                    <b>Single chart</b>
-                    <span>VelaWorkspace with <code>layout: false</code>: topbar, pickers, status line, bottom bar.</span>
+    <body class="bg-[#0c0d10] text-slate-100">
+
+        <!-- HEADER WYNALGO (Giữ nguyên toàn bộ thông số và class chuẩn từ trang chủ) -->
+        <header class="fixed top-0 left-0 w-full z-40 border-b border-white/5 nav-blur bg-slate-950/80 backdrop-blur-md transition-all duration-200 gpu-layer will-change-transform">
+            <div class="max-w-7xl mx-auto px-7 sm:px-8 lg:px-8 py-5 flex items-center justify-between relative z-50">
+                
+                <!-- Logo WynAlgo -->
+                <a href="https://wynalgo.com" class="flex items-center group relative h-10 w-44" aria-label="Về đầu trang WynAlgo">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="relative w-full h-full flex items-center scale-100 transition-transform duration-200">
+                        <svg class="w-full h-full" viewBox="0 0 1384 414" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                            <g>
+                                <g>
+                                    <path d="M174.364,349.43c26.604,-38.667 53.209,-77.328 79.813,-115.989c26.451,38.656 52.903,77.312 79.349,115.973c0,0 -26.388,-38.703 0,0l39.115,-60.448l135.591,-209.553l-31.765,-79.412l-146.308,226.116l-76.035,-110.596l-0.005,0l-76.046,110.596l-146.308,-226.116l-31.765,79.412c45.151,69.92 174.364,270.017 174.364,270.017" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <path d="M135.752,0.03l-88.108,0l138.779,214.186l45.289,-65.872l-95.959,-148.313Z" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <path d="M254.094,112.185l-77.111,-112.148l154.265,-0.037l-77.154,112.185Z" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <path d="M321.72,214.178l-45.257,-65.82l96.007,-148.355l88.118,0l-138.81,214.212" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <path d="M43.972,55.562c-0.744,0 -0.749,1.161 0,1.161c0.744,0 0.749,-1.161 0,-1.161" style="fill:#fff;fill-rule:nonzero;"/>
+                                </g>
+                                <g>
+                                    <path d="M621.261,176.867l-48.493,0l-35.518,133.963l-1.946,0l-34.707,-133.963l-50.277,0l58.873,172.563l-1.46,5.514c-2.433,14.11 -9.569,22.381 -30.977,22.381c-4.866,0 -11.353,-0.487 -14.272,-1.135l0,32.437c4.541,0.973 14.759,1.946 24.652,1.946c45.249,0 62.116,-23.679 74.118,-55.305l4.379,-11.839c0.649,-1.946 55.629,-166.562 55.629,-166.562Z" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <path d="M626.335,349.43l45.574,0l0,-99.094c0,-25.138 13.137,-37.464 32.437,-37.464c18.165,0 31.626,9.731 31.626,36.491l0,100.067l45.574,0l0,-113.366c0,-40.708 -24.814,-61.792 -59.035,-61.792c-27.733,0 -44.276,15.083 -49.79,28.22l-1.946,0l0,-25.625l-44.438,0l0,172.563Z" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <path d="M834.301,349.43l16.543,-54.98l72.009,0l16.381,54.98l50.115,0l-72.983,-221.38l-55.629,0l-73.307,221.38l46.871,0Zm53.845,-177.266l25.625,87.741l-53.683,0l25.949,-87.741l2.108,0Z" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <rect x="992.963" y="116.372" width="45.736" height="233.057" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <path d="M1130.865,380.083c-18.975,0 -29.842,-8.109 -31.95,-19.462l-43.952,0c0.811,27.085 23.03,52.71 74.604,52.71c42.168,0 82.551,-16.705 82.551,-66.171l0,-170.293l-44.925,0l0,25.463l-1.946,0c-6.325,-15.083 -21.895,-27.571 -48.817,-27.571c-38.6,0 -65.036,29.031 -65.036,78.821l0,15.083c0,50.115 26.922,78.335 64.711,78.335c24.49,0 42.33,-11.839 48.655,-27.085l1.946,0l0,24.328c0,22.868 -11.677,35.843 -35.843,35.843Zm2.271,-169.319c20.597,0 33.41,18.165 33.41,45.249l0,13.948c0,25.463 -12.326,43.303 -33.248,43.303c-20.597,0 -35.194,-15.57 -35.194,-44.276l0,-12.975c0,-28.544 13.786,-45.249 35.032,-45.249Z" style="fill:#fff;fill-rule:nonzero;"/>
+                                    <path d="M1303.962,173.785c-52.71,0 -80.119,35.356 -80.119,83.362l0,11.353c0,51.899 27.409,84.011 80.119,84.011c52.385,0 79.632,-32.437 79.632,-84.173l0,-11.353c0,-48.979 -27.247,-83.2 -79.632,-83.2Zm-0.162,34.869c26.436,0 33.572,24.003 33.572,48.979l0,10.866c0,24.49 -6.812,48.979 -33.572,48.979c-26.76,0 -33.896,-24.652 -33.896,-48.979l0,-10.866c0,-24.814 7.46,-48.979 33.896,-48.979Z" style="fill:#fff;fill-rule:nonzero;"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
                 </a>
-                <a class="card" href="./workspace.html">
-                    <b>VelaWorkspace</b>
-                    <span>The multi-chart grid: layouts, active cell, shared chrome.</span>
-                </a>
-            </nav>
-        </main>
+
+                <!-- Menu điều hướng (Trỏ link tuyệt đối về trang chủ wynalgo.com) -->
+                <nav class="hidden lg:flex items-center gap-8 text-[14px] font-medium text-slate-300 absolute left-1/2 -translate-x-1/2">
+                    <a href="https://wynalgo.com/#intro" class="hover:text-white transition-all duration-200 font-bold">Bộ chỉ báo</a>
+                    <a href="https://wynalgo.com/#pricing" class="hover:text-white transition-all duration-200 font-bold flex items-center gap-1">Bảng giá</a>
+                    <a href="https://wynalgo.com/#commit" class="hover:text-white transition-all duration-200 font-bold">Chính sách</a>
+                    <a href="https://wynalgo.com/#faq" class="hover:text-white transition-all duration-200 font-bold">FAQ</a>
+                </nav>
+
+                <!-- Nút CTA -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="https://wynalgo.com/#pricing" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-emerald-900/20">Nhận truy cập ✧</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- KHUNG CHỨA BIỂU ĐỒ VELA WORKSPACE -->
+        <div id="workspace"></div>
+
+        <script type="module" src="./workspace.ts"></script>
     </body>
 </html>
