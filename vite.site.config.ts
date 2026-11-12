@@ -6,10 +6,10 @@ export default defineConfig({
     plugins: [velaUiSource()],
     root: 'playground',
     build: {
-        outDir: '../site-dist', // Tách riêng thư mục output để không đè lên dist của thư viện
+        outDir: '../site-dist',
         emptyOutDir: true,
         rollupOptions: {
-            input: resolve(__dirname, 'playground/workspace.html'),
+            input: resolve(__dirname, 'playground/index.html'),
         },
     },
 });
