@@ -13,6 +13,13 @@ import { DemoEngine } from "./demo-engine";
 import { playgroundStorage } from "./persistence";
 import { addSampleMarks } from "./marks";
 
+import { DARK_THEME, createTheme } from "../src";
+const customDarkTheme = createTheme({
+  ...DARK_THEME,
+  background: '#020920', // Chart background
+  // surface: '#131722', // Tool background
+});
+
 const ws = new VelaWorkspace("#workspace", {
   layout: "4",
   // The unified vocabulary: top-level chart options are every cell's DEFAULT,
