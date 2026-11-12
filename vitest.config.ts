@@ -4,17 +4,15 @@ import { resolve } from 'path';
 
 export default defineConfig({
     plugins: [velaUiSource()],
-    // Cấu hình build để Vercel nhận diện đúng trang workspace làm điểm xuất phát
+    root: 'playground', // Đặt thư mục gốc build là playground để nhận thẳng file HTML ở đây
     build: {
+        outDir: '../dist',
+        emptyOutDir: true,
         rollupOptions: {
-            input: {
-                index: resolve(__dirname, 'playground/workspace.html'),
-            },
+            input: resolve(__dirname, 'playground/workspace.html'),
         },
     },
     test: {
-        // `.mjs` tests cover the framework-free playground modules (plain JS, outside the
-        // TS build) — e.g. the keyboard-shortcut policy in `playground/modules/shortcuts-core.js`.
         include: ['src/**/*.test.ts', 'test/**/*.test.ts', 'test/**/*.test.mjs'],
         environment: 'node',
     },
