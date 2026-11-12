@@ -49,7 +49,7 @@ setTimeout(() => {
       description: "Chỉ báo dòng tiền thông minh và xác định xu hướng độc quyền của WynAlgo",
       inputs: [
         { id: "inputKey", name: "Activation Key", type: "string", defval: "", tooltip: "Nhập License Key để kích hoạt." },
-        { id: "sens", name: "Sensitivity ", type: "integer", defval: 3, min: 1, max: 5 }
+        { id: "sens", name: "Sensitivity (Độ nhạy)", type: "integer", defval: 3, min: 1, max: 5 }
       ],
       run(context: any) {
         const key = context.inputs.inputKey;
@@ -113,7 +113,7 @@ setTimeout(() => {
   // drawingToolbar: true,           // the ONE shared drawing toolbar (acts on the active cell)
   // maxWebglCells: 8,               // above this many cells, every cell renders canvas2d
   //                                 //  (browser WebGL-context budget; glow unavailable there)
-});
+
 
 // The page shell follows the app theme — flip it from any cell's chart settings →
 // Canvas → Theme (or `__ws.setTheme('light')` in the console); every LIVE cell relays
