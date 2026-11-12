@@ -13,13 +13,6 @@ import { DemoEngine } from "./demo-engine";
 import { playgroundStorage } from "./persistence";
 import { addSampleMarks } from "./marks";
 
-import { DARK_THEME, createTheme } from "../src";
-const customDarkTheme = createTheme({
-  ...DARK_THEME,
-  background: '#020920', // Chart background
-  // surface: '#131722', // Tool background
-});
-
 const ws = new VelaWorkspace("#workspace", {
   layout: "4",
   // The unified vocabulary: top-level chart options are every cell's DEFAULT,
@@ -39,7 +32,7 @@ const ws = new VelaWorkspace("#workspace", {
   defaultLanguage: "demo", // scripts added without a `language` run on the engine above
   // No script manifest: the indicators dialog lists the built-in catalog only.
   live: true,
-  theme: customDarkTheme,
+  theme: "dark",
   autofocus: true, // the workspace IS the page — shortcuts work from the first keystroke
   // The playground's CUSTOM persistence (shared with the widget page): the whole
   // workspace document — layout, sync, timezone, and per cell the market, renderer
