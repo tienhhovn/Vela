@@ -13,6 +13,76 @@ import { DemoEngine } from "./demo-engine";
 import { playgroundStorage } from "./persistence";
 import { addSampleMarks } from "./marks";
 
+//  WynAlgo_BigMoney
+const wynAlgoBigMoneyProxy = {
+  id: "wynalgo-bigmoney-3.1",
+  name: "WynAlgo_BigMoney™ [3.1]",
+  description: "Chỉ báo dòng tiền thông minh và xác định xu hướng độc quyền của WynAlgo",
+  language: "demo", // Tạm dùng engine demo/script chuẩn của workspace
+  
+  // Khai báo các Inputs khớp hoàn toàn với thông số Pine Script của bạn
+  inputs: [
+    { 
+      id: "inputKey", 
+      name: "Activation Key", 
+      type: "string", 
+      defval: "", 
+      tooltip: "Nhập License Key để kích hoạt chỉ báo." 
+    },
+    { 
+      id: "sens", 
+      name: "Sensitivity (Độ nhạy)", 
+      type: "integer", 
+      defval: 3, 
+      min: 1, 
+      max: 5, 
+      group: "CRU Functions",
+      tooltip: "Độ nhạy của tín hiệu chỉ báo [1-5]." 
+    },
+    { 
+      id: "showbbsqueeze", 
+      name: "Show Squeezing of BB", 
+      type: "boolean", 
+      defval: true, 
+      group: "CRU Functions" 
+    },
+    { 
+      id: "showMAs", 
+      name: "Show Double MA", 
+      type: "boolean", 
+      defval: false, 
+      group: "CRU Functions" 
+    },
+    { 
+      id: "showgap", 
+      name: "Show Gaps", 
+      type: "boolean", 
+      defval: false, 
+      group: "CRU Functions" 
+    }
+  ],
+
+  // Hàm thực thi khi script chạy trên biểu đồ
+  async run(context) {
+    const key = context.inputs.inputKey;
+    const sensitivity = context.inputs.sens;
+    const candles = context.series.bars(); // Lấy toàn bộ nến lịch sử (để dành gửi cho backend sau này)
+
+    console.log("WynAlgo BigMoney đang chạy với Key:", key ? "Đã nhập" : "Chưa có Key");
+    console.log("Độ nhạy hiện tại:", sensitivity);
+    console.log("Số lượng nến lịch sử sẵn sàng:", candles.length);
+
+    // Tạm thời trả về mảng rỗng hoặc thông báo chưa kết nối backend
+    if (!key) {
+      // Bạn có thể hiển thị cảnh báo yêu cầu nhập key trực tiếp lên biểu đồ
+      return [];
+    }
+
+    // Sau này khi viết Backend, chúng ta sẽ thay thế đoạn này bằng lệnh fetch(...)
+    return [];
+  }
+};
+
 const ws = new VelaWorkspace("#workspace", {
   layout: "4",
   // The unified vocabulary: top-level chart options are every cell's DEFAULT,
@@ -22,10 +92,10 @@ const ws = new VelaWorkspace("#workspace", {
   symbol: "BTCUSDT", // bare = first declared provider; 'coinbase:BTC-USD' pins a venue
   timeframe: "60",
   cells: {
-    btc: { symbol: "BTCUSDT", timeframe: "60" },
-    eth: { symbol: "ETHUSDT", timeframe: "15" },
-    sol: { symbol: "SOLUSDT", timeframe: "240" },
-    bnb: { symbol: "BNBUSDT", timeframe: "D" },
+    btc: { symbol: "BTCUSDT", timeframe: "60", indicators: ["wynalgo-bigmoney-3.1"] },
+    eth: { symbol: "ETHUSDT", timeframe: "15", indicators: ["wynalgo-bigmoney-3.1"] },
+    sol: { symbol: "SOLUSDT", timeframe: "240", indicators: ["wynalgo-bigmoney-3.1"] },
+    bnb: { symbol: "BNBUSDT", timeframe: "D", indicators: ["wynalgo-bigmoney-3.1"] },
   },
   providers: { binance: () => new BinanceProvider() },
   engines: { demo: () => new DemoEngine() }, // ONE instance per cell (a worker engine would get a thread each)
@@ -33,6 +103,9 @@ const ws = new VelaWorkspace("#workspace", {
   // No script manifest: the indicators dialog lists the built-in catalog only.
   live: true,
   theme: "dark",
+
+  scripts: [wynAlgoBigMoneyProxy],
+
   autofocus: true, // the workspace IS the page — shortcuts work from the first keystroke
   // The playground's CUSTOM persistence (shared with the widget page): the whole
   // workspace document — layout, sync, timezone, and per cell the market, renderer
